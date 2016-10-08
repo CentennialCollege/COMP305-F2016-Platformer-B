@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour {
 	public Camera camera;
 	public Transform SpawnPoint;
 
+	[Header("Sound Clips")]
+	public AudioSource JumpSound;
+	public AudioSource DeathSound;
+
 	// Use this for initialization
 	void Start () {
 		this._initialize ();
@@ -42,6 +46,7 @@ public class PlayerController : MonoBehaviour {
 			// check if input is present for jumping
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				this._jump = 1f;
+				this.JumpSound.Play ();
 			}
 
 			this._rigidbody.AddForce (new Vector2 (
@@ -90,6 +95,7 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.CompareTag ("DeathPlane")) {
 			// move the player's position to the spawn point's position
 			this._transform.position = this.SpawnPoint.position;
+			this.DeathSound.Play ();
 		}
 	}
 
